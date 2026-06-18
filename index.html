@@ -458,15 +458,13 @@
     }
 
     .service-grid,
-    .work-grid,
-    .copy-grid {
+    .work-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
 
-    .service,
-    .copy-card {
+    .service {
       min-height: 280px;
       padding: 22px;
       border: 1px solid var(--line);
@@ -487,21 +485,18 @@
       font-weight: 900;
     }
 
-    .service h3,
-    .copy-card h3 {
+    .service h3 {
       margin: 0 0 10px;
       font-size: 22px;
       letter-spacing: 0;
     }
 
-    .service p,
-    .copy-card p {
+    .service p {
       margin: 0 0 16px;
       color: var(--muted);
     }
 
-    .service ul,
-    .copy-card ul {
+    .service ul {
       display: grid;
       gap: 8px;
       margin: 0;
@@ -511,15 +506,13 @@
       font-size: 14px;
     }
 
-    .service li,
-    .copy-card li {
+    .service li {
       display: flex;
       gap: 8px;
       align-items: flex-start;
     }
 
-    .service li::before,
-    .copy-card li::before {
+    .service li::before {
       content: "";
       flex: 0 0 auto;
       width: 6px;
@@ -731,23 +724,6 @@
       font-size: 14px;
     }
 
-    .copy-band {
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      background: #fffdf7;
-    }
-
-    .copy-text {
-      min-height: 168px;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: #344641;
-      background: #ffffff;
-      font-size: 14px;
-      white-space: pre-line;
-    }
-
     .contact-band {
       padding: 72px 0 84px;
       background:
@@ -862,7 +838,6 @@
 
       .service-grid,
       .work-grid,
-      .copy-grid,
       .process {
         grid-template-columns: 1fr 1fr;
       }
@@ -952,13 +927,11 @@
 
       .service-grid,
       .work-grid,
-      .copy-grid,
       .process {
         grid-template-columns: 1fr;
       }
 
-      .service,
-      .copy-card {
+      .service {
         min-height: 0;
       }
 
@@ -981,7 +954,6 @@
         <a href="#services">服务</a>
         <a href="#works">案例</a>
         <a href="#pricing">报价</a>
-        <a href="#scripts">话术</a>
         <a class="nav-cta" href="#contact">加微信沟通</a>
       </div>
     </nav>
@@ -1203,41 +1175,6 @@
             <span>04</span>
             <h3>交付上线</h3>
             <p>交HTML文件、部署链接或可直接使用的页面资料。</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="scripts" class="copy-band">
-      <div class="shell">
-        <div class="section-head">
-          <h2>可直接发出去的获客文案</h2>
-          <p>先发给身边开店、做课程、做咨询、做活动的人，拿需求比空等平台单更快。</p>
-        </div>
-        <div class="copy-grid">
-          <article class="copy-card">
-            <h3>朋友圈 / 社群</h3>
-            <div class="copy-text">最近接小单：官网改版、H5活动页、报名表单、微信引流页、AI客服话术整理。
-
-适合小店、工作室、课程报名、活动推广。
-
-首批案例价199元起，有需求可以发参考页面，我先免费判断能不能做。</div>
-          </article>
-          <article class="copy-card">
-            <h3>私信客户</h3>
-            <div class="copy-text">你好，我看到你们现在有线上展示/报名/咨询需求。
-
-我可以做手机端展示页、活动H5、表单页面和微信咨询入口，先帮你把客户能看懂、能留下联系方式的页面做出来。
-
-你可以发一个参考页面，我先免费给你判断范围和报价。</div>
-          </article>
-          <article class="copy-card">
-            <h3>报价说明</h3>
-            <div class="copy-text">这个需求我建议按基础版做：
-
-包含1个页面、手机端适配、文案排版、微信联系入口、1次小修改。
-
-价格199元，确认后先付50%定金，交付可预览页面后付尾款。</div>
           </article>
         </div>
       </div>
