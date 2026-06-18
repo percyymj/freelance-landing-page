@@ -7,6 +7,12 @@
 - 报名 / 咨询表单页面
 - AI客服话术配置
 
+## 在线访问
+
+GitHub Pages：
+
+`https://percyymj.github.io/freelance-landing-page/`
+
 ## 本地查看
 
 直接用浏览器打开：
@@ -51,3 +57,5 @@ http://localhost:8080
 当前是纯静态页面，不需要后端、不需要数据库、不需要构建工具。
 
 详细部署清单见 `docs/deploy-checklist.md`。
+
+自定义域名准备见 `docs/custom-domain.md`。
