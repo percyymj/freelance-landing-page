@@ -1,0 +1,1334 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>北京前端页面接单服务 | 官网改版 H5 表单 AI客服</title>
+  <meta name="description" content="面向北京小店、工作室、培训机构和个人创业项目，提供官网改版、H5活动页、报名表单、小后台页面和AI客服话术配置。">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #16211f;
+      --muted: #5f6f69;
+      --line: #dbe5df;
+      --paper: #f8fbf8;
+      --white: #ffffff;
+      --teal: #0f766e;
+      --teal-dark: #0b4f4a;
+      --coral: #e65f3c;
+      --amber: #f2b84b;
+      --mint: #d9f2e8;
+      --shadow: 0 24px 70px rgba(17, 37, 32, .16);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid rgba(230, 95, 60, .45);
+      outline-offset: 3px;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -48px;
+      z-index: 30;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: white;
+      background: var(--teal-dark);
+      transition: top .2s ease;
+    }
+
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    .shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(219, 229, 223, .78);
+      background: rgba(248, 251, 248, .92);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      color: white;
+      background: linear-gradient(135deg, var(--teal), var(--coral));
+      box-shadow: 0 10px 24px rgba(15, 118, 110, .25);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-dark);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 8px;
+      color: white;
+      background: var(--teal-dark);
+      font-weight: 700;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: min(760px, 82vh);
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(248, 251, 248, .98) 0%, rgba(248, 251, 248, .86) 42%, rgba(248, 251, 248, .2) 100%),
+        linear-gradient(135deg, #f8fbf8 0%, #e8f4ef 48%, #fff4e2 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(15, 118, 110, .07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 118, 110, .07) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(90deg, transparent 0%, black 42%, black 100%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 520px) minmax(420px, 1fr);
+      align-items: center;
+      gap: 34px;
+      padding: 72px 0 56px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      color: var(--teal-dark);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background: var(--coral);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 10em;
+      font-size: clamp(40px, 7vw, 74px);
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 560px;
+      margin: 22px 0 0;
+      color: #33443f;
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(17, 37, 32, .13);
+    }
+
+    .btn-primary {
+      color: white;
+      background: var(--teal-dark);
+    }
+
+    .btn-secondary {
+      border-color: rgba(15, 118, 110, .24);
+      color: var(--teal-dark);
+      background: rgba(255, 255, 255, .72);
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 30px;
+      padding: 0 10px;
+      border: 1px solid rgba(15, 118, 110, .16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .66);
+    }
+
+    .scene {
+      position: relative;
+      min-height: 520px;
+    }
+
+    .browser {
+      position: absolute;
+      right: 0;
+      top: 28px;
+      width: min(620px, 100%);
+      overflow: hidden;
+      border: 1px solid rgba(22, 33, 31, .12);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      transform: rotate(-1.5deg);
+    }
+
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 42px;
+      padding: 0 14px;
+      border-bottom: 1px solid var(--line);
+      background: #f3f7f5;
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--line);
+    }
+
+    .dots span:nth-child(1) {
+      background: var(--coral);
+    }
+
+    .dots span:nth-child(2) {
+      background: var(--amber);
+    }
+
+    .dots span:nth-child(3) {
+      background: var(--teal);
+    }
+
+    .browser-body {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 18px;
+      min-height: 330px;
+      padding: 22px;
+    }
+
+    .mock-title {
+      height: 24px;
+      width: 72%;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      background: #20312d;
+    }
+
+    .mock-line {
+      height: 10px;
+      margin-bottom: 9px;
+      border-radius: 999px;
+      background: #d9e4df;
+    }
+
+    .mock-line.short {
+      width: 68%;
+    }
+
+    .mock-cta {
+      width: 116px;
+      height: 36px;
+      margin-top: 22px;
+      border-radius: 8px;
+      background: var(--coral);
+    }
+
+    .mock-visual {
+      min-height: 270px;
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(15, 118, 110, .9), rgba(242, 184, 75, .82)),
+        linear-gradient(45deg, #0f766e, #f2b84b);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mock-visual::before,
+    .mock-visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .82);
+    }
+
+    .mock-visual::before {
+      width: 58%;
+      height: 84px;
+      left: 22px;
+      bottom: 24px;
+    }
+
+    .mock-visual::after {
+      width: 84px;
+      height: 84px;
+      right: 26px;
+      top: 28px;
+    }
+
+    .phone {
+      position: absolute;
+      right: 68px;
+      bottom: 16px;
+      width: 184px;
+      height: 354px;
+      border: 10px solid #17211f;
+      border-radius: 28px;
+      background: var(--white);
+      box-shadow: 0 24px 60px rgba(17, 37, 32, .24);
+      transform: rotate(4deg);
+      overflow: hidden;
+    }
+
+    .phone-screen {
+      height: 100%;
+      padding: 18px 14px;
+      background: linear-gradient(180deg, #f8fbf8, #edf8f3);
+    }
+
+    .phone-hero {
+      height: 92px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--teal), var(--amber));
+    }
+
+    .phone-card {
+      height: 44px;
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+    }
+
+    .stats-card {
+      position: absolute;
+      left: 54px;
+      bottom: 56px;
+      width: 230px;
+      padding: 18px;
+      border: 1px solid rgba(22, 33, 31, .12);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 20px 48px rgba(17, 37, 32, .15);
+    }
+
+    .stats-card strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .stats-card span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 430px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .service-grid,
+    .work-grid,
+    .copy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .service,
+    .copy-card {
+      min-height: 280px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: 0 14px 32px rgba(17, 37, 32, .06);
+    }
+
+    .service-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      color: var(--teal-dark);
+      background: var(--mint);
+      font-weight: 900;
+    }
+
+    .service h3,
+    .copy-card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .service p,
+    .copy-card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+
+    .service ul,
+    .copy-card ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: #344641;
+      font-size: 14px;
+    }
+
+    .service li,
+    .copy-card li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .service li::before,
+    .copy-card li::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 6px;
+      height: 6px;
+      margin-top: 9px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+
+    .work-band {
+      background: #10231f;
+      color: white;
+    }
+
+    .work-band .section-head p,
+    .work-band .tag {
+      color: rgba(255, 255, 255, .68);
+    }
+
+    .work {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .work-shot {
+      min-height: 180px;
+      padding: 16px;
+      background: #f8fbf8;
+    }
+
+    .shot-window {
+      height: 148px;
+      overflow: hidden;
+      border: 1px solid #dbe5df;
+      border-radius: 8px;
+      background: white;
+    }
+
+    .shot-header {
+      height: 24px;
+      border-bottom: 1px solid #dbe5df;
+      background: #f2f6f3;
+    }
+
+    .shot-content {
+      display: grid;
+      gap: 9px;
+      padding: 12px;
+    }
+
+    .shot-block {
+      height: 28px;
+      border-radius: 6px;
+      background: #d9e4df;
+    }
+
+    .shot-block.main {
+      height: 54px;
+      background: linear-gradient(135deg, var(--teal), var(--amber));
+    }
+
+    .shot-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .work-info {
+      padding: 18px;
+    }
+
+    .work-info h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+      letter-spacing: 0;
+    }
+
+    .work-info p {
+      margin: 0;
+      color: rgba(255, 255, 255, .68);
+      font-size: 14px;
+    }
+
+    .price-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tab {
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      background: var(--white);
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .tab[aria-selected="true"] {
+      color: white;
+      border-color: var(--teal-dark);
+      background: var(--teal-dark);
+    }
+
+    .price-panel {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 18px;
+      align-items: stretch;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: 0 18px 46px rgba(17, 37, 32, .08);
+    }
+
+    .quote {
+      padding: 24px;
+      border-radius: var(--radius);
+      color: white;
+      background: linear-gradient(135deg, var(--teal-dark), #17352f);
+    }
+
+    .quote-label {
+      color: rgba(255, 255, 255, .72);
+      font-size: 14px;
+    }
+
+    .quote-price {
+      display: block;
+      margin: 10px 0 12px;
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .quote small {
+      color: rgba(255, 255, 255, .76);
+    }
+
+    .deliverables {
+      display: grid;
+      gap: 10px;
+      align-content: center;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .deliverables li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      color: #344641;
+    }
+
+    .deliverables li:last-child {
+      border-bottom: 0;
+    }
+
+    .check {
+      display: grid;
+      flex: 0 0 auto;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      color: white;
+      background: var(--coral);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      padding: 20px;
+      border-left: 3px solid var(--teal);
+      border-radius: 0 8px 8px 0;
+      background: var(--white);
+    }
+
+    .step span {
+      color: var(--coral);
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .step h3 {
+      margin: 8px 0;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .copy-band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: #fffdf7;
+    }
+
+    .copy-text {
+      min-height: 168px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: #344641;
+      background: #ffffff;
+      font-size: 14px;
+      white-space: pre-line;
+    }
+
+    .contact-band {
+      padding: 72px 0 84px;
+      background:
+        linear-gradient(135deg, rgba(15, 118, 110, .12), rgba(230, 95, 60, .11)),
+        var(--paper);
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .contact h2 {
+      margin: 0 0 14px;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .contact p {
+      max-width: 620px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .contact-box {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: 0 18px 46px rgba(17, 37, 32, .08);
+    }
+
+    .qr {
+      width: 100%;
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .qr img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .qr figcaption {
+      padding: 12px 12px 14px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .contact-note {
+      margin: 14px 0 0;
+      padding: 12px;
+      border-radius: 8px;
+      color: #344641;
+      background: #f8fbf8;
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 22px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      background: var(--white);
+    }
+
+    @media (max-width: 920px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-inner,
+      .price-panel,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 0;
+      }
+
+      .hero-inner {
+        padding-top: 48px;
+      }
+
+      .scene {
+        min-height: 420px;
+      }
+
+      .browser {
+        width: 100%;
+        top: 0;
+      }
+
+      .phone {
+        right: 22px;
+      }
+
+      .stats-card {
+        left: 12px;
+      }
+
+      .service-grid,
+      .work-grid,
+      .copy-grid,
+      .process {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .brand span:last-child {
+        max-width: 10em;
+        white-space: normal;
+        line-height: 1.15;
+      }
+
+      .hero-inner {
+        gap: 28px;
+        padding: 38px 0 42px;
+      }
+
+      h1 {
+        max-width: 9em;
+        font-size: 42px;
+      }
+
+      .hero-copy {
+        font-size: 16px;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .scene {
+        min-height: 360px;
+      }
+
+      .browser {
+        transform: rotate(0);
+      }
+
+      .browser-body {
+        grid-template-columns: 1fr;
+        min-height: 260px;
+        padding: 16px;
+      }
+
+      .mock-visual {
+        min-height: 120px;
+      }
+
+      .phone {
+        width: 128px;
+        height: 246px;
+        right: 16px;
+        bottom: 6px;
+        border-width: 7px;
+        border-radius: 22px;
+      }
+
+      .phone-screen {
+        padding: 12px 10px;
+      }
+
+      .phone-hero {
+        height: 62px;
+      }
+
+      .phone-card {
+        height: 30px;
+      }
+
+      .stats-card {
+        width: 178px;
+        bottom: 22px;
+        padding: 14px;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 12px;
+      }
+
+      .service-grid,
+      .work-grid,
+      .copy-grid,
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .service,
+      .copy-card {
+        min-height: 0;
+      }
+
+      section {
+        padding: 54px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到正文</a>
+
+  <header class="topbar" id="top">
+    <nav class="shell nav" aria-label="主导航">
+      <a class="brand" href="#top" aria-label="回到顶部">
+        <span class="brand-mark">前</span>
+        <span>北京前端页面接单</span>
+      </a>
+      <div class="nav-links">
+        <a href="#services">服务</a>
+        <a href="#works">案例</a>
+        <a href="#pricing">报价</a>
+        <a href="#scripts">话术</a>
+        <a class="nav-cta" href="#contact">加微信沟通</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="shell hero-inner">
+        <div>
+          <div class="eyebrow">北京本地 / 远程都可接</div>
+          <h1 id="hero-title">前端页面接单服务</h1>
+          <p class="hero-copy">
+            帮小店、工作室、培训机构和个人创业项目快速做好官网改版、H5活动页、报名表单、小后台页面和AI客服话术配置。
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">现在发需求</a>
+            <a class="btn btn-secondary" href="#pricing">查看报价</a>
+          </div>
+          <div class="hero-proof" aria-label="服务特点">
+            <span class="pill">手机端优先</span>
+            <span class="pill">先看需求再报价</span>
+            <span class="pill">小单可当天启动</span>
+          </div>
+        </div>
+
+        <div class="scene" aria-hidden="true">
+          <div class="browser">
+            <div class="browser-bar">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span style="color:#7b8b85;font-size:12px;">landing-page.html</span>
+            </div>
+            <div class="browser-body">
+              <div>
+                <div class="mock-title"></div>
+                <div class="mock-line"></div>
+                <div class="mock-line"></div>
+                <div class="mock-line short"></div>
+                <div class="mock-cta"></div>
+              </div>
+              <div class="mock-visual"></div>
+            </div>
+          </div>
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-hero"></div>
+              <div class="phone-card"></div>
+              <div class="phone-card"></div>
+              <div class="phone-card"></div>
+            </div>
+          </div>
+          <div class="stats-card">
+            <strong>199+</strong>
+            <span>起步价适合首批案例，后续按需求报价</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="shell">
+        <div class="section-head">
+          <h2>先卖能成交的小服务</h2>
+          <p>不做空泛开发，先围绕获客、展示、留资和客服效率解决实际问题。</p>
+        </div>
+        <div class="service-grid">
+          <article class="service">
+            <div class="service-icon">页</div>
+            <h3>官网 / 落地页</h3>
+            <p>适合需要发朋友圈、小红书、微信群和本地广告的业务。</p>
+            <ul>
+              <li>首页结构梳理</li>
+              <li>手机端和电脑端适配</li>
+              <li>微信联系入口</li>
+            </ul>
+          </article>
+          <article class="service">
+            <div class="service-icon">H5</div>
+            <h3>H5活动页</h3>
+            <p>适合课程报名、活动预约、产品介绍和招商推广。</p>
+            <ul>
+              <li>活动信息展示</li>
+              <li>报名表单</li>
+              <li>海报式传播页面</li>
+            </ul>
+          </article>
+          <article class="service">
+            <div class="service-icon">AI</div>
+            <h3>AI客服配置</h3>
+            <p>把客户常问问题整理成可复制、可训练、可执行的话术体系。</p>
+            <ul>
+              <li>FAQ知识库</li>
+              <li>标准回复模板</li>
+              <li>报价和售前话术</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="works" class="work-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>可展示的案例方向</h2>
+          <p>第一批客户先用这些方向沟通，真实成交后替换成截图、链接和客户评价。</p>
+        </div>
+        <div class="work-grid">
+          <article class="work">
+            <div class="work-shot">
+              <div class="shot-window">
+                <div class="shot-header"></div>
+                <div class="shot-content">
+                  <div class="shot-block main"></div>
+                  <div class="shot-row">
+                    <div class="shot-block"></div>
+                    <div class="shot-block"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="work-info">
+              <h3>培训机构报名页</h3>
+              <p>课程卖点、时间地点、报名表单、微信咨询入口。</p>
+            </div>
+          </article>
+          <article class="work">
+            <div class="work-shot">
+              <div class="shot-window">
+                <div class="shot-header"></div>
+                <div class="shot-content">
+                  <div class="shot-row">
+                    <div class="shot-block main"></div>
+                    <div class="shot-block main"></div>
+                  </div>
+                  <div class="shot-block"></div>
+                  <div class="shot-block"></div>
+                </div>
+              </div>
+            </div>
+            <div class="work-info">
+              <h3>本地商家展示页</h3>
+              <p>门店服务、价格套餐、地址电话、二维码引流。</p>
+            </div>
+          </article>
+          <article class="work">
+            <div class="work-shot">
+              <div class="shot-window">
+                <div class="shot-header"></div>
+                <div class="shot-content">
+                  <div class="shot-block"></div>
+                  <div class="shot-block main"></div>
+                  <div class="shot-row">
+                    <div class="shot-block"></div>
+                    <div class="shot-block"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="work-info">
+              <h3>AI客服话术库</h3>
+              <p>常见问题、异议处理、报价说明、成交跟进。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="shell">
+        <div class="section-head">
+          <h2>报价简单，先成交</h2>
+          <p>首批客户重点拿案例和评价，范围明确后再开始做，避免无限改。</p>
+        </div>
+
+        <div class="price-tabs" role="tablist" aria-label="报价套餐">
+          <button class="tab" id="tab-basic" type="button" role="tab" aria-selected="true" aria-controls="pricing-panel" tabindex="0" data-plan="basic">基础版</button>
+          <button class="tab" id="tab-standard" type="button" role="tab" aria-selected="false" aria-controls="pricing-panel" tabindex="-1" data-plan="standard">标准版</button>
+          <button class="tab" id="tab-pro" type="button" role="tab" aria-selected="false" aria-controls="pricing-panel" tabindex="-1" data-plan="pro">完整版</button>
+        </div>
+
+        <div class="price-panel" id="pricing-panel" role="tabpanel" aria-labelledby="tab-basic" tabindex="0">
+          <div class="quote">
+            <span class="quote-label" id="plan-name">基础版</span>
+            <strong class="quote-price" id="plan-price">¥199</strong>
+            <small id="plan-note">适合简单展示页或单个H5页面，先把业务发出去。</small>
+          </div>
+          <ul class="deliverables" id="plan-list">
+            <li><span class="check">✓</span><span>1个手机端页面</span></li>
+            <li><span class="check">✓</span><span>基础文案排版</span></li>
+            <li><span class="check">✓</span><span>微信联系入口</span></li>
+            <li><span class="check">✓</span><span>1次小修改</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="shell">
+        <div class="section-head">
+          <h2>交付流程</h2>
+          <p>每一步都让客户知道你在做什么，也保护你的时间。</p>
+        </div>
+        <div class="process">
+          <article class="step">
+            <span>01</span>
+            <h3>看需求</h3>
+            <p>确认行业、页面用途、参考页面、联系方式和交付时间。</p>
+          </article>
+          <article class="step">
+            <span>02</span>
+            <h3>定范围</h3>
+            <p>写清楚页面数量、功能点、修改次数和价格。</p>
+          </article>
+          <article class="step">
+            <span>03</span>
+            <h3>先收定金</h3>
+            <p>小单可收50%，复杂需求按阶段收款。</p>
+          </article>
+          <article class="step">
+            <span>04</span>
+            <h3>交付上线</h3>
+            <p>交HTML文件、部署链接或可直接使用的页面资料。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="scripts" class="copy-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>可直接发出去的获客文案</h2>
+          <p>先发给身边开店、做课程、做咨询、做活动的人，拿需求比空等平台单更快。</p>
+        </div>
+        <div class="copy-grid">
+          <article class="copy-card">
+            <h3>朋友圈 / 社群</h3>
+            <div class="copy-text">最近接小单：官网改版、H5活动页、报名表单、微信引流页、AI客服话术整理。
+
+适合小店、工作室、课程报名、活动推广。
+
+首批案例价199元起，有需求可以发参考页面，我先免费判断能不能做。</div>
+          </article>
+          <article class="copy-card">
+            <h3>私信客户</h3>
+            <div class="copy-text">你好，我看到你们现在有线上展示/报名/咨询需求。
+
+我可以做手机端展示页、活动H5、表单页面和微信咨询入口，先帮你把客户能看懂、能留下联系方式的页面做出来。
+
+你可以发一个参考页面，我先免费给你判断范围和报价。</div>
+          </article>
+          <article class="copy-card">
+            <h3>报价说明</h3>
+            <div class="copy-text">这个需求我建议按基础版做：
+
+包含1个页面、手机端适配、文案排版、微信联系入口、1次小修改。
+
+价格199元，确认后先付50%定金，交付可预览页面后付尾款。</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-band">
+      <div class="shell contact">
+        <div>
+          <h2>把你的需求发来，我先免费判断能不能做</h2>
+          <p>
+            发行业、参考页面、想实现的功能、预算和交付时间。能做会直接给范围和报价，不能做会说明原因。
+          </p>
+          <a class="btn btn-primary" href="#wechat-qr">扫码加微信</a>
+        </div>
+        <aside class="contact-box" aria-label="微信联系方式">
+          <figure class="qr" id="wechat-qr">
+            <img src="assets/wechat-qr.jpg" alt="percy 微信二维码">
+            <figcaption>扫码添加微信：percy</figcaption>
+          </figure>
+          <p class="contact-note">添加时备注：前端页面 / H5 / AI客服</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">北京前端页面接单服务 · 官网改版 / H5活动页 / 表单页面 / AI客服配置</div>
+  </footer>
+
+  <script>
+    const plans = {
+      basic: {
+        name: "基础版",
+        price: "¥199",
+        note: "适合简单展示页或单个H5页面，先把业务发出去。",
+        items: ["1个手机端页面", "基础文案排版", "微信联系入口", "1次小修改"]
+      },
+      standard: {
+        name: "标准版",
+        price: "¥499",
+        note: "适合小商家官网、活动报名页和带表单的获客页面。",
+        items: ["2-3个页面区块", "手机和电脑适配", "报名/咨询表单", "2次小修改"]
+      },
+      pro: {
+        name: "完整版",
+        price: "¥999+",
+        note: "适合需要完整页面、话术整理和交付说明的项目。",
+        items: ["完整落地页结构", "AI客服FAQ整理", "表单或数据收集方案", "交付文档和3次小修改"]
+      }
+    };
+
+    const tabs = document.querySelectorAll(".tab");
+    const planName = document.getElementById("plan-name");
+    const planPrice = document.getElementById("plan-price");
+    const planNote = document.getElementById("plan-note");
+    const planList = document.getElementById("plan-list");
+    const pricePanel = document.getElementById("pricing-panel");
+
+    function renderPlan(tab) {
+      const plan = plans[tab.dataset.plan];
+      tabs.forEach((item) => {
+        item.setAttribute("aria-selected", "false");
+        item.setAttribute("tabindex", "-1");
+      });
+      tab.setAttribute("aria-selected", "true");
+      tab.setAttribute("tabindex", "0");
+      pricePanel.setAttribute("aria-labelledby", tab.id);
+      planName.textContent = plan.name;
+      planPrice.textContent = plan.price;
+      planNote.textContent = plan.note;
+      planList.innerHTML = plan.items
+        .map((item) => `<li><span class="check">✓</span><span>${item}</span></li>`)
+        .join("");
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => renderPlan(tab));
+      tab.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
+          return;
+        }
+
+        event.preventDefault();
+        const direction = event.key === "ArrowRight" ? 1 : -1;
+        const currentIndex = Array.from(tabs).indexOf(tab);
+        const nextIndex = (currentIndex + direction + tabs.length) % tabs.length;
+        const nextTab = tabs[nextIndex];
+        renderPlan(nextTab);
+        nextTab.focus();
+      });
+    });
+  </script>
+</body>
+</html>
