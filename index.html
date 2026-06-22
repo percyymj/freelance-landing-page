@@ -680,6 +680,135 @@
       border-bottom: 0;
     }
 
+    .estimator-band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: #fffdf7;
+    }
+
+    .estimator {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, .85fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .estimate-form,
+    .estimate-result {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: 0 14px 32px rgba(17, 37, 32, .06);
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label,
+    .check-field legend {
+      color: #344641;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .field select,
+    .field input,
+    .field textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      background: #fbfdfb;
+    }
+
+    .field textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .check-field {
+      margin: 18px 0 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .check-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .check-options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfdfb;
+      color: #344641;
+      font-size: 14px;
+    }
+
+    .estimate-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .result-price {
+      display: block;
+      margin: 8px 0 12px;
+      color: var(--teal-dark);
+      font-size: clamp(36px, 5vw, 54px);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .result-meta {
+      display: grid;
+      gap: 8px;
+      margin: 0 0 18px;
+      padding: 0;
+      list-style: none;
+      color: #344641;
+      font-size: 14px;
+    }
+
+    .result-copy {
+      width: 100%;
+      min-height: 260px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: #344641;
+      background: #fbfdfb;
+      resize: vertical;
+      white-space: pre-line;
+    }
+
+    .copy-status {
+      min-height: 22px;
+      margin: 10px 0 0;
+      color: var(--teal-dark);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
     .check {
       display: grid;
       flex: 0 0 auto;
@@ -807,6 +936,7 @@
 
       .hero-inner,
       .price-panel,
+      .estimator,
       .contact {
         grid-template-columns: 1fr;
       }
@@ -927,6 +1057,8 @@
 
       .service-grid,
       .work-grid,
+      .field-grid,
+      .check-options,
       .process {
         grid-template-columns: 1fr;
       }
@@ -954,6 +1086,7 @@
         <a href="#services">服务</a>
         <a href="#works">案例</a>
         <a href="#pricing">报价</a>
+        <a href="#estimator">报价器</a>
         <a class="nav-cta" href="#contact">加微信沟通</a>
       </div>
     </nav>
@@ -1149,6 +1282,117 @@
       </div>
     </section>
 
+    <section id="estimator" class="estimator-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>需求报价器</h2>
+          <p>客户填完后，会自动生成报价区间、交付范围和可复制的确认话术。</p>
+        </div>
+
+        <div class="estimator">
+          <form class="estimate-form" id="estimate-form">
+            <div class="field-grid">
+              <div class="field">
+                <label for="client-industry">行业类型</label>
+                <select id="client-industry" name="industry">
+                  <option value="小店/门店">小店 / 门店</option>
+                  <option value="培训/课程">培训 / 课程</option>
+                  <option value="工作室/咨询">工作室 / 咨询</option>
+                  <option value="活动/社群">活动 / 社群</option>
+                  <option value="其他">其他</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="project-type">项目类型</label>
+                <select id="project-type" name="type">
+                  <option value="官网/落地页">官网 / 落地页</option>
+                  <option value="H5活动页">H5活动页</option>
+                  <option value="报名/咨询表单">报名 / 咨询表单</option>
+                  <option value="AI客服话术配置">AI客服话术配置</option>
+                  <option value="组合需求">组合需求</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="page-count">页面数量</label>
+                <select id="page-count" name="pages">
+                  <option value="1">1个页面</option>
+                  <option value="2">2个页面</option>
+                  <option value="3">3个页面</option>
+                  <option value="4">4个及以上</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="deadline">交付时间</label>
+                <select id="deadline" name="deadline">
+                  <option value="normal">3-5天</option>
+                  <option value="fast">48小时内</option>
+                  <option value="urgent">24小时内</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="budget">客户预算</label>
+                <select id="budget" name="budget">
+                  <option value="unknown">还不确定</option>
+                  <option value="low">300元以内</option>
+                  <option value="mid">300-800元</option>
+                  <option value="high">800元以上</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="material-ready">资料准备</label>
+                <select id="material-ready" name="material">
+                  <option value="ready">文案图片基本齐全</option>
+                  <option value="partial">只有部分资料</option>
+                  <option value="none">还没有资料</option>
+                </select>
+              </div>
+            </div>
+
+            <fieldset class="check-field">
+              <legend>需要的功能</legend>
+              <div class="check-options">
+                <label><input type="checkbox" name="features" value="desktop"> 电脑端适配</label>
+                <label><input type="checkbox" name="features" value="form"> 表单收集</label>
+                <label><input type="checkbox" name="features" value="deploy"> 协助部署</label>
+                <label><input type="checkbox" name="features" value="ai"> AI客服FAQ</label>
+              </div>
+            </fieldset>
+
+            <div class="field" style="margin-top:18px;">
+              <label for="project-note">补充需求</label>
+              <textarea id="project-note" name="note" placeholder="例如：要放课程介绍、价格表、老师介绍、报名二维码，参考某个同行页面。"></textarea>
+            </div>
+
+            <div class="estimate-actions">
+              <button class="btn btn-primary" type="submit">生成报价</button>
+              <button class="btn btn-secondary" type="reset">清空重填</button>
+            </div>
+          </form>
+
+          <aside class="estimate-result" aria-live="polite">
+            <span class="quote-label">建议报价区间</span>
+            <strong class="result-price" id="estimate-price">¥499 - ¥699</strong>
+            <ul class="result-meta" id="estimate-meta">
+              <li>建议套餐：标准版</li>
+              <li>建议定金：50%</li>
+              <li>交付周期：3-5天</li>
+            </ul>
+            <textarea class="result-copy" id="estimate-copy" readonly></textarea>
+            <div class="estimate-actions">
+              <button class="btn btn-primary" type="button" id="copy-estimate">复制话术</button>
+              <a class="btn btn-secondary" href="#wechat-qr">发给我确认</a>
+            </div>
+            <p class="copy-status" id="copy-status"></p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
     <section id="process">
       <div class="shell">
         <div class="section-head">
@@ -1266,6 +1510,163 @@
         nextTab.focus();
       });
     });
+
+    const estimateForm = document.getElementById("estimate-form");
+    const estimatePrice = document.getElementById("estimate-price");
+    const estimateMeta = document.getElementById("estimate-meta");
+    const estimateCopy = document.getElementById("estimate-copy");
+    const copyEstimate = document.getElementById("copy-estimate");
+    const copyStatus = document.getElementById("copy-status");
+
+    const featureMap = {
+      desktop: { label: "电脑端适配", price: 150 },
+      form: { label: "表单收集", price: 200 },
+      deploy: { label: "协助部署", price: 200 },
+      ai: { label: "AI客服FAQ", price: 299 }
+    };
+
+    function getCheckedFeatures() {
+      return Array.from(estimateForm.querySelectorAll('input[name="features"]:checked'))
+        .map((item) => item.value);
+    }
+
+    function getPlanName(total) {
+      if (total < 350) {
+        return "基础版";
+      }
+
+      if (total < 900) {
+        return "标准版";
+      }
+
+      return "完整版";
+    }
+
+    function getCycle(deadline, material) {
+      if (deadline === "urgent") {
+        return "24小时内，建议加急收费";
+      }
+
+      if (deadline === "fast") {
+        return "48小时内";
+      }
+
+      if (material === "none") {
+        return "资料补齐后3-5天";
+      }
+
+      return "3-5天";
+    }
+
+    function calculateEstimate() {
+      const formData = new FormData(estimateForm);
+      const pages = Number(formData.get("pages"));
+      const deadline = formData.get("deadline");
+      const material = formData.get("material");
+      const projectType = formData.get("type");
+      const industry = formData.get("industry");
+      const budget = formData.get("budget");
+      const note = String(formData.get("note") || "").trim();
+      const features = getCheckedFeatures();
+
+      let basePrice = 199;
+      basePrice += Math.max(0, pages - 1) * 180;
+
+      if (projectType === "AI客服话术配置") {
+        basePrice += 199;
+      }
+
+      if (projectType === "组合需求") {
+        basePrice += 300;
+      }
+
+      features.forEach((feature) => {
+        basePrice += featureMap[feature].price;
+      });
+
+      if (deadline === "fast") {
+        basePrice = Math.round(basePrice * 1.3);
+      }
+
+      if (deadline === "urgent") {
+        basePrice = Math.round(basePrice * 1.5);
+      }
+
+      if (material === "partial") {
+        basePrice += 100;
+      }
+
+      if (material === "none") {
+        basePrice += 200;
+      }
+
+      const minPrice = Math.max(199, Math.round(basePrice / 50) * 50);
+      const maxPrice = minPrice + (minPrice < 500 ? 200 : 300);
+      const planName = getPlanName(minPrice);
+      const cycle = getCycle(deadline, material);
+      const featureLabels = features.length
+        ? features.map((feature) => featureMap[feature].label)
+        : ["微信 / 电话咨询入口"];
+      const deposit = minPrice <= 300 ? "100元定金" : "50%定金";
+      const budgetNote = budget === "low" && minPrice > 300
+        ? "客户预算偏低，建议减少页面、表单、部署或AI客服范围。"
+        : "预算和范围基本匹配，可继续确认资料。";
+      const materialNote = material === "ready"
+        ? "资料基本齐全，可以直接排期。"
+        : "需要先补齐文案、图片、二维码、联系方式和参考页面。";
+
+      const copy = `这个需求可以做，我建议按${planName}评估。
+
+当前理解：
+1. 行业：${industry}
+2. 类型：${projectType}
+3. 页面数量：${pages >= 4 ? "4个及以上" : `${pages}个`}
+4. 功能：${featureLabels.join("、")}
+5. 交付时间：${cycle}
+6. 资料情况：${materialNote}
+
+建议报价：¥${minPrice} - ¥${maxPrice}
+付款方式：确认合作后先付${deposit}，第一版可预览后再付尾款。
+
+本次包含约定范围内的小修改。新增页面、新增功能、复杂后台、支付、登录、长期维护不包含在当前报价里，需要另行确认。
+
+${budgetNote}${note ? `\n\n补充需求：${note}` : ""}`;
+
+      estimatePrice.textContent = `¥${minPrice} - ¥${maxPrice}`;
+      estimateMeta.innerHTML = [
+        `建议套餐：${planName}`,
+        `建议定金：${deposit}`,
+        `交付周期：${cycle}`,
+        budgetNote
+      ].map((item) => `<li>${item}</li>`).join("");
+      estimateCopy.value = copy;
+      copyStatus.textContent = "";
+    }
+
+    estimateForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      calculateEstimate();
+    });
+
+    estimateForm.addEventListener("reset", () => {
+      window.setTimeout(calculateEstimate, 0);
+    });
+
+    estimateForm.addEventListener("change", calculateEstimate);
+    estimateForm.addEventListener("input", calculateEstimate);
+
+    copyEstimate.addEventListener("click", async () => {
+      estimateCopy.select();
+      try {
+        await navigator.clipboard.writeText(estimateCopy.value);
+        copyStatus.textContent = "已复制，可以直接发给客户。";
+      } catch (error) {
+        document.execCommand("copy");
+        copyStatus.textContent = "已选中文案，如未复制成功请手动复制。";
+      }
+    });
+
+    calculateEstimate();
   </script>
 </body>
 </html>
